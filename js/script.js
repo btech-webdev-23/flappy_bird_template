@@ -90,7 +90,18 @@ function update(delta) {
  * This draw function is called when drawing or updating anything visual
  * @param {number} interp The interpolation value provided by the game loop
  */
-function draw(interp) {}
+function draw(interp) {
+	apply_element_force(last_bird_y + (bird_y - last_bird_y) * interp, bird);
+
+	const pipes = document.querySelectorAll(".pipe");
+	pipes.forEach((p) =>
+		apply_element_force(+p.last_x + (p.x - +p.last_x) * interp, p, "left"),
+	);
+
+	if (should_update_score) {
+		score_title.textContent = "Score: " + score;
+	}
+}
 
 /**
  * This end function is called by the game loop when the loop exits
@@ -101,3 +112,11 @@ function end() {}
  * The flap function called when the flap button is clicked
  */
 function flap() {}
+
+/**
+ *
+ * @param {number} value the force to apply
+ * @param {HTMLElement} element the element to apply the force to
+ * @param {("top"|"bottom"|"left"|"right")} type the direction to apply the force to
+ */
+function apply_element_force(value, element, type = "top") {}
