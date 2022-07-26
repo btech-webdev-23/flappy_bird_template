@@ -77,11 +77,6 @@ function update(delta) {
 					has_score_incremented = true;
 				}
 			}
-
-			// Bird has left a pipe boundary, update score calculating variables
-		} else {
-			has_score_incremented = false;
-			should_update_score = true;
 		}
 	}
 }
